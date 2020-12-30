@@ -5,6 +5,9 @@ ADHERES TO SEMANTIC VERSIONING 2.0.0 (https://semver.org/spec/v2.0.0.html)
 
 CHANGELOG
 
+[ 0.1.2 -- 12/29/2020 ]
+I was copying the string........ It works now...
+
 [ 0.1.2a -- 12/29/2020 ]
 Trying to transition to std::string for assets.
 It is not going very well, specifically with SDL_RWops.

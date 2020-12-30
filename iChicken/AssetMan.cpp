@@ -89,10 +89,10 @@ void checkAssetLoaded(std::string name) {
     ASSERT(!knownname, "No such asset " << name << " is known.");
 }
 
-const char* getAsset(std::string name) {
+char* getAsset(std::string name) {
     initAssetManager();
     checkAssetLoaded(name);
-    return ASSETS[name].c_str();
+    return ASSETS[name].data();
 }
 
 int getAssetSize(std::string name) {
@@ -111,13 +111,13 @@ void destructAssetManager() {
     zip_close(game_zip);
 }
 
-std::string getAssetString(std::string name) {
+std::string* getAssetString(std::string name) {
     initAssetManager();
     checkAssetLoaded(name);
-    return ASSETS[name];
+    return &ASSETS[name];
 }
 
 SDL_RWops* getAssetRWops(std::string name) {
-    std::string asset = getAssetString(name);
-    return SDL_RWFromMem((void*)asset.c_str(), asset.size());
+    checkAssetLoaded(name);
+    return SDL_RWFromMem((void*)ASSETS[name].data(), ASSETS[name].size());
 }
