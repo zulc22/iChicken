@@ -11,13 +11,13 @@ ICHICKEN ASSET MANAGER
 #define GAMEZIP "testgame.zip"
 
 std::map<std::string, std::string> ASSETFILENAMES;
-std::map<std::string, std::pair<size_t, char*>> ASSETS;
+std::map<std::string, std::string> ASSETS;
 
 CSimpleIniA game_ini;
 zip_t* game_zip;
 
 bool ASSETS_has_key(std::string key) {
-    return map_has_key<std::string, std::pair<size_t, char*>>(ASSETS, key);
+    return map_has_key<std::string, std::string>(ASSETS, key);
 }
 bool ASSETFILENAMES_has_key(std::string key) {
     return map_has_key<std::string, std::string>(ASSETFILENAMES, key);
@@ -31,14 +31,9 @@ void initAssetManager() {
     std::cout << "Initializing asset pipeline" << std::endl;
 
     game_zip = zip_open(GAMEZIP, ZIP_DEFAULT_COMPRESSION_LEVEL, 'r');
-    zip_entry_open(game_zip, "game.ini");
-    ASSETS["game.ini"] = { (size_t)zip_entry_size(game_zip), NULL };
-    ASSETS["game.ini"].second = NULL;
-    zip_entry_read(game_zip, (void**)&ASSETS["game.ini"].second, &ASSETS["game.ini"].first);
-    zip_entry_close(game_zip);
-    ASSETS["game.ini"].second[ASSETS["game.ini"].first] = 0x00;
-
-    SI_Error rc = game_ini.LoadData(ASSETS["game.ini"].second);
+    loadAssetbyFN("game.ini");
+    std::cout << ASSETS["game.ini"] << std::endl;
+    SI_Error rc = game_ini.LoadData(ASSETS["game.ini"].c_str());
     ASSERT(rc != SI_OK, "Unable to load game.ini");
 
     std::cout << "Assets discovered from game.ini:" << std::endl;
@@ -52,6 +47,12 @@ void initAssetManager() {
     assets.clear();
 }
 
+void loadAssetbyFN(std::string filename) {
+    initAssetManager();
+    ASSETFILENAMES[filename] = filename;
+    loadAsset(filename);
+}
+
 void loadAsset(std::string name) {
     initAssetManager();
     bool knownname = ASSETFILENAMES_has_key(name);
@@ -60,9 +61,12 @@ void loadAsset(std::string name) {
     if (loaded) return;
 
     zip_entry_open(game_zip, ASSETFILENAMES[name].c_str());
-    ASSETS[name] = { (size_t)zip_entry_size(game_zip), NULL };
-    zip_entry_read(game_zip, (void**)&ASSETS[name].second, &ASSETS[name].first);
+    size_t size = zip_entry_size(game_zip)+1;
+    void* asset = NULL;
+    zip_entry_read(game_zip, &asset, &size);
     zip_entry_close(game_zip);
+
+    ASSETS[name] = std::string((char*)asset, size);
 }
 /*
 void loadAssets(std::list<std::string> assetNames) {
@@ -72,12 +76,10 @@ void loadAssets(std::list<std::string> assetNames) {
 }
 */
 void unloadAsset(std::string name) {
-    free(ASSETS[name].second);
     ASSETS.erase(name);
 }
 
-char* getAsset(std::string name) {
-    initAssetManager();
+void checkAssetLoaded(std::string name) {
     bool knownname = ASSETFILENAMES_has_key(name);
     bool loaded = ASSETS_has_key(name);
     if (!loaded && knownname) {
@@ -85,19 +87,18 @@ char* getAsset(std::string name) {
         loadAsset(name);
     }
     ASSERT(!knownname, "No such asset " << name << " is known.");
-    return ASSETS[name].second;
+}
+
+const char* getAsset(std::string name) {
+    initAssetManager();
+    checkAssetLoaded(name);
+    return ASSETS[name].c_str();
 }
 
 int getAssetSize(std::string name) {
     initAssetManager();
-    bool knownname = ASSETFILENAMES_has_key(name);
-    bool loaded = ASSETS_has_key(name);
-    if (!loaded && knownname) {
-        std::cout << "WARNING: Loading asset " << name << " on the fly -- this shouldn't happen!" << std::endl;
-        loadAsset(name);
-    }
-    ASSERT(!knownname, "No such asset " << name << " is known.");
-    return ASSETS[name].first;
+    checkAssetLoaded(name);
+    return ASSETS[name].size();
 }
 
 std::string fromGameIni(std::string section, std::string key) {
@@ -108,4 +109,15 @@ std::string fromGameIni(std::string section, std::string key) {
 
 void destructAssetManager() {
     zip_close(game_zip);
+}
+
+std::string getAssetString(std::string name) {
+    initAssetManager();
+    checkAssetLoaded(name);
+    return ASSETS[name];
+}
+
+SDL_RWops* getAssetRWops(std::string name) {
+    std::string asset = getAssetString(name);
+    return SDL_RWFromMem((void*)asset.c_str(), asset.size());
 }

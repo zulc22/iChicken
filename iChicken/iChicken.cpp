@@ -5,6 +5,10 @@ ADHERES TO SEMANTIC VERSIONING 2.0.0 (https://semver.org/spec/v2.0.0.html)
 
 CHANGELOG
 
+[ 0.1.2a -- 12/29/2020 ]
+Trying to transition to std::string for assets.
+It is not going very well, specifically with SDL_RWops.
+
 [ 0.1.1 -- 12/29/2020 ]
 Mini-refactor, splitting functions into seperate .CPP files.
 Next: Replace `std::map<std::string, std::pair<size_t, char*>> ASSETS`
@@ -98,8 +102,8 @@ bool initSDLShit() {
     std::string musicName = fromGameIni("game", "music");
     std::cout << "Loading " << musicName << std::endl;
     loadAsset(musicName);
-    music = Mix_LoadMUSType_RW(SDL_RWFromMem(getAsset(musicName), getAssetSize(musicName)), MUS_MID, 0);
-    ASSERT(music == NULL, "Couldn't load mus_test!");
+    music = Mix_LoadMUSType_RW(getAssetRWops(musicName), MUS_MID, 0);
+    ASSERT(music == NULL, "Couldn't load "<<musicName<<"!");
 
     return true;
 }
