@@ -4,8 +4,8 @@
 #include "Util.h"
 
 namespace AssetPipeline {
-	bool ASSETS_has_key(std::string key);
-	bool ASSETFILENAMES_has_key(std::string key);
+	bool assetLoaded(std::string key);
+	bool assetKnown(std::string key);
 	void initAssetManager();
 	void loadAssetbyFN(std::string filename);
 	void loadAsset(std::string name);
@@ -15,6 +15,6 @@ namespace AssetPipeline {
 	char* getAsset(std::string name);
 	int getAssetSize(std::string name);
 	std::string fromGameIni(std::string section, std::string key);
-	void destructAssetManager();
+	void destruct();
 	std::string* getAssetString(std::string name);
 }

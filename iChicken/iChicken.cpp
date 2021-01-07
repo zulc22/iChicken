@@ -5,6 +5,9 @@ ADHERES TO SEMANTIC VERSIONING 2.0.0 (https://semver.org/spec/v2.0.0.html)
 
 CHANGELOG
 
+[ 0.1.3 -- 1/7/2021 ]
+Namespace refactorization.
+
 [ 0.1.2 -- 12/29/2020 ]
 I was copying the string........ It works now...
 
@@ -90,10 +93,8 @@ will need many, many, refactors.
 
 /////////////////////
 
-
-
 void destruct() {
-	AssetPipeline::destructAssetManager();
+	AssetPipeline::destruct();
 	Multimedia::unload();
 }
 

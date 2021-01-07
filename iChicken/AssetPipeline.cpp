@@ -10,16 +10,17 @@ ICHICKEN ASSET MANAGER
 #include "AssetPipeline_priv.h"
 
 namespace AssetPipeline {
+
 	std::map<std::string, std::string> ASSETFILENAMES;
 	std::map<std::string, std::string> ASSETS;
 
 	CSimpleIniA game_ini;
 	zip_t* game_zip;
 
-	bool ASSETS_has_key(std::string key) {
+	bool assetLoaded(std::string key) {
 		return Util::map_has_key<std::string, std::string>(ASSETS, key);
 	}
-	bool ASSETFILENAMES_has_key(std::string key) {
+	bool assetKnown(std::string key) {
 		return Util::map_has_key<std::string, std::string>(ASSETFILENAMES, key);
 	}
 
@@ -54,8 +55,8 @@ namespace AssetPipeline {
 
 	void loadAsset(std::string name) {
 		initAssetManager();
-		bool knownname = ASSETFILENAMES_has_key(name);
-		bool loaded = ASSETS_has_key(name);
+		bool knownname = assetKnown(name);
+		bool loaded = assetLoaded(name);
 		ERRIF(!knownname, "Tried to load unknown asset " << name);
 		if (loaded) return;
 
@@ -78,10 +79,10 @@ namespace AssetPipeline {
 		ASSETS.erase(name);
 	}
 
-	#define logWARNSYM "/!\\ "
+	const std::string logWARNSYM = "/!\\ ";
 	void checkAssetLoaded(std::string name) {
-		bool knownname = ASSETFILENAMES_has_key(name);
-		bool loaded = ASSETS_has_key(name);
+		bool knownname = assetKnown(name);
+		bool loaded = assetLoaded(name);
 		if (!loaded && knownname) {
 			std::cout << logWARNSYM << "Loading asset " << name << " on the fly -- AVOID this when possible!" << std::endl;
 			loadAsset(name);
@@ -107,7 +108,7 @@ namespace AssetPipeline {
 		return std::string(valueChr);
 	}
 
-	void destructAssetManager() {
+	void destruct() {
 		zip_close(game_zip);
 	}
 
@@ -116,4 +117,5 @@ namespace AssetPipeline {
 		checkAssetLoaded(name);
 		return &ASSETS[name];
 	}
+
 }
