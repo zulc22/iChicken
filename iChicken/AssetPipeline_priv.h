@@ -1,6 +1,6 @@
 #pragma once
 #include "globals.h"
-#include "AssetMan.h"
+#include "AssetPipeline.h"
 
 namespace AssetPipeline {
 	extern std::map<std::string, std::string> ASSETFILENAMES;

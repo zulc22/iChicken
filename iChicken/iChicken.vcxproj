@@ -141,16 +141,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="iChicken.cpp" />
-    <ClCompile Include="AssetMan.cpp" />
-    <ClCompile Include="SGLib.cpp" />
+    <ClCompile Include="AssetPipeline.cpp" />
+    <ClCompile Include="Multimedia.cpp" />
     <ClCompile Include="Util.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AssetMan_internalvars.h" />
+    <ClInclude Include="AssetPipeline_priv.h" />
     <ClInclude Include="globals.h" />
-    <ClInclude Include="AssetMan.h" />
-    <ClInclude Include="SGLib.h" />
-    <ClInclude Include="SGLib_internalvars.h" />
+    <ClInclude Include="AssetPipeline.h" />
+    <ClInclude Include="Multimedia.h" />
+    <ClInclude Include="Multimedia_priv.h" />
     <ClInclude Include="Util.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -21,10 +21,10 @@
     <ClCompile Include="Util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AssetMan.cpp">
+    <ClCompile Include="AssetPipeline.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SGLib.cpp">
+    <ClCompile Include="Multimedia.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,19 +32,19 @@
     <ClInclude Include="globals.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AssetMan.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SGLib.h">
+    <ClInclude Include="AssetPipeline.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AssetMan_internalvars.h">
+    <ClInclude Include="AssetPipeline_priv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SGLib_internalvars.h">
+    <ClInclude Include="Multimedia.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Multimedia_priv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

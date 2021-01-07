@@ -85,8 +85,8 @@ will need many, many, refactors.
 
 #include "globals.h"
 #include "Util.h"
-#include "AssetMan.h"
-#include "SGLib.h"
+#include "AssetPipeline.h"
+#include "Multimedia.h"
 
 /////////////////////
 

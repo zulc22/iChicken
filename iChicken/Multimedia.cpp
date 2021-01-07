@@ -1,8 +1,8 @@
 #include "globals.h"
-#include "AssetMan.h"
-#include "AssetMan_internalvars.h"
-#include "SGLib.h"
-#include "SGLib_internalvars.h"
+#include "AssetPipeline.h"
+#include "AssetPipeline_priv.h"
+#include "Multimedia.h"
+#include "Multimedia_priv.h"
 
 namespace AssetPipeline {
 	SDL_RWops* getAssetRWops(std::string name) {

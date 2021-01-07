@@ -6,8 +6,8 @@ ICHICKEN ASSET MANAGER
 
 #include "globals.h"
 #include "Util.h"
-#include "AssetMan.h"
-#include "AssetMan_internalvars.h"
+#include "AssetPipeline.h"
+#include "AssetPipeline_priv.h"
 
 namespace AssetPipeline {
 	std::map<std::string, std::string> ASSETFILENAMES;
@@ -17,10 +17,10 @@ namespace AssetPipeline {
 	zip_t* game_zip;
 
 	bool ASSETS_has_key(std::string key) {
-		return map_has_key<std::string, std::string>(ASSETS, key);
+		return Util::map_has_key<std::string, std::string>(ASSETS, key);
 	}
 	bool ASSETFILENAMES_has_key(std::string key) {
-		return map_has_key<std::string, std::string>(ASSETFILENAMES, key);
+		return Util::map_has_key<std::string, std::string>(ASSETFILENAMES, key);
 	}
 
 	bool readGameIni = false;

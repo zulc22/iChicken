@@ -1,7 +1,7 @@
 #pragma once
 
 #include "globals.h"
-#include "SGLib.h"
+#include "Multimedia.h"
 
 namespace Multimedia {
 	extern Mix_Music* music;

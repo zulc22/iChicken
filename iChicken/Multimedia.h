@@ -1,6 +1,6 @@
 #pragma once
 #include "globals.h"
-#include "AssetMan.h"
+#include "AssetPipeline.h"
 
 namespace Multimedia {
 	bool init();

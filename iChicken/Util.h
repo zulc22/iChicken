@@ -6,11 +6,12 @@ std::string concatstrs(int argnum, ...);
 
 // map_has_key() heavily adapted from "Alan (Carson?)'s" SO answer
 // https://stackoverflow.com/a/3136537
-
-template<typename K, typename V>
-bool map_has_key(std::map<K, V> map, K key) {
-	auto it = map.find(key);
-	return it != map.end();
+namespace Util {
+    template<typename K, typename V>
+    bool map_has_key(std::map<K, V> map, K key) {
+	    auto it = map.find(key);
+	    return it != map.end();
+    }
 }
 
 // ERRIF() heavily adapted from Konrad Rudolph's SO answer
@@ -48,5 +49,9 @@ bool map_has_key(std::map<K, V> map, K key) {
 #define curdirbuf getcwd
 #endif
 
-#define CURDIR_dirbufsize 1024
-std::string curdir();
+namespace Util {
+    std::string concatstrs(int argnum, ...);
+
+    const int CURDIR_dirbufsize = 1024;
+    std::string curdir();
+}
