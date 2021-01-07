@@ -24,6 +24,9 @@
     <ClCompile Include="AssetMan.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="SGLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h">
@@ -33,6 +36,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Util.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SGLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetMan_internalvars.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SGLib_internalvars.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

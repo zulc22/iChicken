@@ -9,23 +9,32 @@ std::string concatstrs(int argnum, ...);
 
 template<typename K, typename V>
 bool map_has_key(std::map<K, V> map, K key) {
-    auto it = map.find(key);
-    return it != map.end();
+	auto it = map.find(key);
+	return it != map.end();
 }
 
-// ASSERT() adapted from Konrad Rudolph's SO answer
+// ERRIF() heavily adapted from Konrad Rudolph's SO answer
 // https://stackoverflow.com/a/3767883
+
 #ifndef NDEBUG
-#   define ASSERT(condition, message) \
+#   define ERRIF(condition, message) \
     do { \
         if (condition) { \
-            std::cerr << "Assertion `" #condition "` failed in " << __FILE__ \
-                      << " line " << __LINE__ << ": " << message << std::endl; \
+            std::cerr << "ERROR: (" #condition ") == TRUE!" << std::endl \
+                      << "(DEBUG BUILD) Caught at: " << __FILE__  << ":L" << __LINE__ << std::endl \
+                      << message << std::endl; \
             std::terminate(); \
         } \
     } while (false)
 #else
-#   define ASSERT(condition, message) do { } while (false)
+#   define ERRIF(condition, message) \
+    do { \
+        if (condition) { \
+            std::cerr << "ERROR: (" #condition ") == TRUE!" << std::endl \
+                      << message << std::endl; \
+            std::terminate(); \
+        } \
+    } while (false)
 #endif
 
 // curdir() adapted from Anvi Jain's article on tutorialspoint
