@@ -5,6 +5,9 @@ ADHERES TO SEMANTIC VERSIONING 2.0.0 (https://semver.org/spec/v2.0.0.html)
 
 CHANGELOG
 
+[ 0.2.0 -- 1/8/2021 ]
+Beginning writing of polymorphic gameloops.
+
 [ 0.1.3 -- 1/7/2021 ]
 Namespace refactorization.
 

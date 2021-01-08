@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Gameloop.cpp" />
     <ClCompile Include="iChicken.cpp" />
     <ClCompile Include="AssetPipeline.cpp" />
     <ClCompile Include="Multimedia.cpp" />
@@ -147,6 +148,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AssetPipeline_priv.h" />
+    <ClInclude Include="Gameloop.h" />
     <ClInclude Include="globals.h" />
     <ClInclude Include="AssetPipeline.h" />
     <ClInclude Include="Multimedia.h" />

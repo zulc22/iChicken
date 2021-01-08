@@ -11,3 +11,4 @@
 #include <SimpleIni.h>
 #include <kubazip/zip/zip.h>
 #include <map>
+#include <cmath>
